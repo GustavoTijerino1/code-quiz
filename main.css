@@ -1,69 +1,81 @@
 * {
     box-sizing: border-box;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0px;
+    padding: 0%;
+    font-family: sans-serif;
 }
 
-marquee h2 {
-    font-size: 85px;
-}
+
 
 body {
-    background-color: #e12ff8;
+    background-color: midnightblue;
+}
+
+main {
     display: flex;
     justify-content: center;
+    flex-flow: column wrap ;
     align-items: center;
-    flex-flow:column wrap;
 }
+    
+
 
 header {
+    color: black;
     display: flex;
-    align-items: center;
+    flex-flow: row wrap;
+    justify-content: space-between;
     border: 10px solid black;
-    flex-flow: column wrap;
+    font-size: 20px;
     background-color: azure;
-}
-
-.startBox {
-    border: 10px solid black;
-    text-align: center;
+    height: 50px;
     padding: 5px;
-    background-color: azure;
 }
 
-.startBox h2 {
+#startBox {
     text-decoration: underline;
+    border: 10px solid black;
+    margin-top: 200px;
+    font-size: 25px;
+    background-color: azure;
+    height: 300px;
+    text-align: center;
+    padding: 50px;
+    /* display: none; */
 }
 
-.box {
-    position: absolute;
-    border: 15px solid black;
-    margin-top: 250px;
-    background-color: azure;
+#startButton {
+    background-color: navy;
+    margin: 10px;
+    color: azure;
+    width: 10%;
+    height: 20%;
+}
+#startButton:hover{
+    background-color: blue;
+}
+
+li {
+    padding: 10px;
+    list-style: none;
+}
+
+#quizBox {
+    display: grid;
+    border: 10px solid black;
+    margin-top: 200px;
+    height: 300px;
     width: 50%;
-    height: 60%;
+    background-color: azure;
     padding: 10px;
     visibility: hidden;
 }
-   
 
-.box h2 {
-    text-align: center;
+#submitBttn {
+    background-color: navy;
+    margin: 10px;
+    color: azure;
 }
- ul {
-     padding: 5px;
-     list-style: none;
-     display: flex;
-     flex-flow: column wrap;
- }
-
- li {
-     margin: 10px;
- }
-
- #submit {
-     margin-left: 250px;
-     width: fit-content;
-
-     
- }
-
+#submitBttn:hover{
+    background-color: blue;
+}
