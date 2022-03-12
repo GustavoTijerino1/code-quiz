@@ -5,8 +5,6 @@
     font-family: sans-serif;
 }
 
-
-
 body {
     background-color: midnightblue;
 }
@@ -61,15 +59,24 @@ li {
 }
 
 #quizBox {
-    display: grid;
     border: 10px solid black;
-    margin-top: 200px;
+    margin-top: 100px;
     height: 300px;
     width: 50%;
     background-color: azure;
     padding: 10px;
     visibility: hidden;
 }
+
+.bttnChoice {
+    margin-top: 20px; 
+    font-size: large;
+    width: 100%;
+}
+
+
+
+
 
 #submitBttn {
     background-color: navy;

@@ -1,17 +1,4 @@
-const startBox = document.getElementById("startBox")
-const startBttn = document.getElementById("startButton")
-const quizBox = document.getElementById("quizBox")
-let timerTag = document.getElementById('timer')
-const questionAsk = document.getElementById("questionAsk")
-const buttonClk = document.querySelectorAll(".choice")
-const submitBttn = document.getElementById("submitBttn")
-
-const answerA = document.getElementById("answerA")
-const answerB = document.getElementById("answerB")
-const answerC = document.getElementById("answerC")
-const answerD = document.getElementById("answerD")
-
-const questions = [
+let questions = [
     {
      question: "Why is JavaScript and Java have similar name?",
 choices: ["JavaScript is a stripped-down version of Java",
@@ -38,58 +25,118 @@ choices: ["JavaScript is a stripped-down version of Java",
   Ans: "Accept parameters"
     }];
 
-    // const subset = (({ choices}) => ({ choices }))(questions);
-    // console.log(subset);
 
-function quizBegins(){
-  questionAsk.innerText = questions[0].question;
-  answerA.textContent = questions[0].choices[0];
-  answerB.textContent = questions[0].choices[1];
-  answerC.textContent = questions[0].choices[2];
-  answerD.textContent = questions[0].choices[3];
+    const startBox = document.getElementById("startBox")
+    const startBttn = document.getElementById("startButton")
+    const quizBox = document.getElementById("quizBox")
+    let timerTag = document.getElementById('timer')
+    const questionAsk = document.getElementById("questionAsk")
+    const submitBttn = document.getElementById("submitBttn")
+    const answerBox = document.querySelector(".answer-box")
+    
+    var questionIndex = 0
+    let score = 0
+    const totalQ = questions.length;
+    
+    
+    
+    startBttn.addEventListener('click', () => {
+      startBox.setAttribute('style', 'display:none');
+      quizBox.setAttribute('style', 'visibility:visible');
+      submitBttn.setAttribute('style', 'visibility:hidden');
+      setTime();
+      quizStarts();
+      
+    });
+    
+    
+    function quizStarts(){
+      displayQuestion();
+   
+
+    questions[questionIndex].choices.forEach(choice => {
+      const bttn = document.createElement("button");
+       bttn.classList.add("bttnChoice")
+      
+       bttn.textContent = choice;
+       
+        answerBox.appendChild(bttn);
+      
+
+        bttn.addEventListener("click", checkQ)
+
+    })
+  };
+
+
+  function checkQ(){
+    if (this.textContent === questions[questionIndex].Ans) {
+      score++
+      console.log("correct");
+
+    }   else {
+      (countdown = -10);
+      console.log(countdown);
+     }if (questionIndex < totalQ - 1) {
+      nextQuestion();
+  } else if (questionIndex === totalQ - 1) { 
+      // hide questions and ask user to enter name and display score in scoreboard.
+      // askUserName();
+  }
+
+  };
+
+  
+
+
+
+  
+function nextQuestion() {
+  questionIndex++
+  const newAnswer = document.querySelectorAll(".choices");
+
+
+  displayQuestion();
+  
+  // replace content of previous question's choices with next question's choices
+  newAnswer.forEach((bttn, i) => {
+      bttn.textContent = questions[questionIndex].choices[i];
+      console.log(newAnswer);
+  })
 
 }
 
+function displayQuestion () {
+  // questionCountOutput.textContent = currentIndex + 1;
+  questionAsk.textContent = questions[questionIndex].question;
+};
 
-buttonClk.forEach(element => {
-  element.addEventListener('click', ()=> {
-    console.log("whahha")
-
-  })
-});
-
-// swtich next questions/answers
-
-// cpu knows correct answer / subtract time
-
-//  countDown -10
-
-// time ends = score = putting initials
-
-// save to localstorage and restart button
+  
 
 
 
 
-startBttn.addEventListener('click', () => {
-    startBox.setAttribute('style', 'display:none');
-    quizBox.setAttribute('style', 'visibility:visible');
-    submitBttn.setAttribute('style', 'visibility:hidden');
-    setTime();
-    quizBegins();
-});
 
 
 function setTime()  {
-    let countdown = 60;
-    let timeInterval = setInterval(function () {
-        countdown--;
-        timerTag.textContent = countdown;
-        if (countdown === 0){
-          clearInterval(timeInterval);
-
-        }
-      },1000);
+  let countdown = 60;
+  let timeInterval = setInterval(function () {
+    countdown--;
+    timerTag.textContent = countdown;
+    if (countdown === 0){
+      clearInterval(timeInterval);
+      
     }
+  },1000);
+}
 
 
+// cpu knows correct answer / subtract time 2
+
+//  countDown -10 
+
+
+// save to localstorage and restart button
+
+    
+    // time ends = score = putting initials
