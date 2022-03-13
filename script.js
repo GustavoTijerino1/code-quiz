@@ -1,4 +1,4 @@
-let questions = [
+const questions = [
     {
      question: "Why is JavaScript and Java have similar name?",
 choices: ["JavaScript is a stripped-down version of Java",
@@ -22,113 +22,110 @@ choices: ["JavaScript is a stripped-down version of Java",
     "Accept parameters and Return a value",
     " Accept parameters",
     "None of the above"],
-  Ans: "Accept parameters"
-    }];
-
-
-    const startBox = document.getElementById("startBox")
-    const startBttn = document.getElementById("startButton")
-    const quizBox = document.getElementById("quizBox")
-    let timerTag = document.getElementById('timer')
-    const questionAsk = document.getElementById("questionAsk")
-    const submitBttn = document.getElementById("submitBttn")
-    const answerBox = document.querySelector(".answer-box")
-    
-    var questionIndex = 0
-    let score = 0
-    const totalQ = questions.length;
-    
-    
-    
-    startBttn.addEventListener('click', () => {
-      startBox.setAttribute('style', 'display:none');
-      quizBox.setAttribute('style', 'visibility:visible');
-      submitBttn.setAttribute('style', 'visibility:hidden');
-      setTime();
-      quizStarts();
-      
+    Ans: "Accept parameters"
+  }];
+  
+  
+  const startBox = document.getElementById("startBox")
+  const startBttn = document.getElementById("startButton")
+  const quizBox = document.getElementById("quizBox")
+  const timerTag = document.querySelector('.timer')
+  const questionAsk = document.getElementById("questionAsk")
+  const submitBttn = document.getElementById("submitBttn")
+  const answerBox = document.querySelector(".answer-box")
+  const scoreTag = document.querySelector(".score")
+  // Global Variables
+  var questionIndex = 0;
+  let score = 0;
+  const totalQ = questions.length;
+  let countdown = 60
+  
+  // This starts the quiz and timer
+  startBttn.addEventListener('click', () => {
+    startBox.setAttribute('style', 'display:none');
+    quizBox.setAttribute('style', 'visibility:visible');
+    submitBttn.setAttribute('style', 'visibility:hidden');
+    setTime();
+    quizStarts();
     });
     
-    
+    // Shows first question and makes a button for each choice
     function quizStarts(){
-      displayQuestion();
-   
-
-    questions[questionIndex].choices.forEach(choice => {
+      
+      resetQ()
+      questionAsk.textContent = questions[questionIndex].question;
+      
+      questions[questionIndex].choices.forEach(choice => {
       const bttn = document.createElement("button");
-       bttn.classList.add("bttnChoice")
+      bttn.classList.add("bttns")
       
-       bttn.textContent = choice;
-       
-        answerBox.appendChild(bttn);
+      bttn.textContent = choice;
+      answerBox.appendChild(bttn);
       
-
-        bttn.addEventListener("click", checkQ)
-
+      bttn.addEventListener("click", checkQ)
+      
     })
   };
-
-
+  
+  
+  // Checks if you question is correct and responds accordenly depending if its right or wrong
+  // Checks to see how many questions are there left
   function checkQ(){
-    if (this.textContent === questions[questionIndex].Ans) {
-      score++
-      console.log("correct");
-
-    }   else {
-      (countdown = -10);
-      console.log(countdown);
-     }if (questionIndex < totalQ - 1) {
-      nextQuestion();
-  } else if (questionIndex === totalQ - 1) { 
-      // hide questions and ask user to enter name and display score in scoreboard.
-      // askUserName();
-  }
-
-  };
-
-  
-
-
-
-  
-function nextQuestion() {
-  questionIndex++
-  const newAnswer = document.querySelectorAll(".choices");
-
-
-  displayQuestion();
-  
-  // replace content of previous question's choices with next question's choices
-  newAnswer.forEach((bttn, i) => {
-      bttn.textContent = questions[questionIndex].choices[i];
-      console.log(newAnswer);
-  })
-
-}
-
-function displayQuestion () {
-  // questionCountOutput.textContent = currentIndex + 1;
-  questionAsk.textContent = questions[questionIndex].question;
-};
-
-  
-
-
-
-
-
-
-function setTime()  {
-  let countdown = 60;
-  let timeInterval = setInterval(function () {
-    countdown--;
-    timerTag.textContent = countdown;
-    if (countdown === 0){
-      clearInterval(timeInterval);
+     if (this.textContent === questions[questionIndex].Ans) {
+      score++;
+      scoreTag.textContent= score;
+        } else {
+      (countdown -= 10);
+     
+     } if (questionIndex < totalQ - 1) {
+        nextQuestion();
+      }   
+      else if (questionIndex === totalQ -1) { 
+         gameOver() }
+      };
       
+      // Removes buttons from HTML
+      function resetQ(){
+        while(answerBox.firstChild){
+        answerBox.removeChild(answerBox.firstChild);
+        }
+      };
+      
+      // Gives new question and puts new answers on the buttons that were removed 
+    function nextQuestion() {
+    questionIndex++
+    const newAnswer = document.querySelectorAll(".bttns");
+
+ 
+    questionAsk.textContent = questions[questionIndex].question;
+    newAnswer.forEach((bttn, i) => {
+     bttn.textContent = questions[questionIndex].choices[i];
+    }) 
+  };
+  
+  // Timer for the Quiz
+  function setTime()  {
+    let timer = setInterval(function(){
+    countdown--;
+    timerTag.textContent = countdown
+  
+    if (countdown <= 0) {
+        clearInterval(timer)
+        gameOver();
     }
-  },1000);
+
+}, 1000)
+
 }
+
+
+// Prompt that lets user put initials and save score
+function gameOver(){
+  var board;
+  board = prompt("Please put your intials to save score. ");
+
+}
+
 
 
 // cpu knows correct answer / subtract time 2
