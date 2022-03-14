@@ -4,7 +4,13 @@
     padding: 0%;
     font-family: sans-serif;
 }
-
+/* sets colors for the material */
+:root {
+    --detail: black;
+    --hover: blue;
+    --display: azure;
+    --buttons: navy;
+}
 body {
     background-color: midnightblue;
 }
@@ -14,58 +20,63 @@ main {
     justify-content: center;
     flex-flow: column wrap ;
     align-items: center;
+   
 }
     
 
-
+/* sets how the header and its items will be placed */
 header {
-    color: black;
+    color: var(--detail);
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    border: 10px solid black;
+    border: 10px solid var(--detail);
     font-size: 20px;
-    background-color: azure;
+    background-color: var(--display);
     height: 50px;
     padding: 5px;
 }
-
+/* Sets how the StartBox placed */
 #startBox {
     text-decoration: underline;
-    border: 10px solid black;
+    border: 10px solid var(--detail);
     margin-top: 200px;
     font-size: 25px;
-    background-color: azure;
+    background-color: var(--display);
     height: 300px;
     text-align: center;
     padding: 50px;
+    position: relative;
+    
     /* display: none; */
 }
 
 #startButton {
-    background-color: navy;
+    background-color: var(--buttons);
     margin: 10px;
-    color: azure;
+    color: var(--display);
     width: 10%;
     height: 20%;
 }
 #startButton:hover{
-    background-color: blue;
+    background-color: var(--hover);
 }
 
 li {
     padding: 10px;
     list-style: none;
 }
-
+/* sets the quiz box appearance  */
 #quizBox {
-    border: 10px solid black;
-    margin-top: 100px;
+    border: 10px solid var(--detail);
+    margin-top: 600px;
     height: 300px;
     width: 50%;
-    background-color: azure;
+    background-color: var(--display);
     padding: 10px;
+    position: absolute;
     visibility: hidden;
+   
 }
 
 .bttns {
@@ -79,10 +90,29 @@ li {
 
 
 #submitBttn {
-    background-color: navy;
-    margin: 10px;
-    color: azure;
+    background-color: var(--buttons);
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--display);
+   height: 35px;
+    width: 100%;
+
 }
 #submitBttn:hover{
-    background-color: blue;
+    background-color: var(--hover);
 }
+/* sets the endgame box location and how it will look */
+.endGame {
+    border: 10px solid var(--detail);
+    background-color: var(--display);
+    position: absolute;
+    margin-top: 600px;
+    height: 300px;
+    width: 50%;
+     display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    font-size: 25px;
+    visibility: hidden;
+}
+

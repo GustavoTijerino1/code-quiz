@@ -34,11 +34,14 @@ choices: ["JavaScript is a stripped-down version of Java",
   const submitBttn = document.getElementById("submitBttn")
   const answerBox = document.querySelector(".answer-box")
   const scoreTag = document.querySelector(".score")
+  const endGame = document.querySelector(".endGame")
+  const scoreBoard = document.querySelector("scoreBoard")
   // Global Variables
   var questionIndex = 0;
   let score = 0;
   const totalQ = questions.length;
   let countdown = 60
+  
   
   // This starts the quiz and timer
   startBttn.addEventListener('click', () => {
@@ -47,15 +50,15 @@ choices: ["JavaScript is a stripped-down version of Java",
     submitBttn.setAttribute('style', 'visibility:hidden');
     setTime();
     quizStarts();
-    });
+  });
+  
+  // Shows first question and makes a button for each choice
+  function quizStarts(){
     
-    // Shows first question and makes a button for each choice
-    function quizStarts(){
-      
-      resetQ()
-      questionAsk.textContent = questions[questionIndex].question;
-      
-      questions[questionIndex].choices.forEach(choice => {
+    resetQ()
+    questionAsk.textContent = questions[questionIndex].question;
+    
+    questions[questionIndex].choices.forEach(choice => {
       const bttn = document.createElement("button");
       bttn.classList.add("bttns")
       
@@ -71,69 +74,78 @@ choices: ["JavaScript is a stripped-down version of Java",
   // Checks if you question is correct and responds accordenly depending if its right or wrong
   // Checks to see how many questions are there left
   function checkQ(){
-     if (this.textContent === questions[questionIndex].Ans) {
+    if (this.textContent === questions[questionIndex].Ans) {
       score++;
       scoreTag.textContent= score;
-        } else {
-      (countdown -= 10);
-     
-     } if (questionIndex < totalQ - 1) {
-        nextQuestion();
-      }   
-      else if (questionIndex === totalQ -1) { 
-         gameOver() }
-      };
+    } else {
+      (countdown -= 30);
       
-      // Removes buttons from HTML
-      function resetQ(){
-        while(answerBox.firstChild){
-        answerBox.removeChild(answerBox.firstChild);
+    } if (questionIndex < totalQ - 1) {
+          nextQuestion();
+        }   
+        else if (questionIndex === totalQ -1) { 
+          gameOver() }
+        };
+        
+        // Removes buttons from HTML
+        function resetQ(){
+          while(answerBox.firstChild){
+            answerBox.removeChild(answerBox.firstChild);
+          }
+        };
+        
+        // Gives new question and puts new answers on the buttons that were removed 
+        function nextQuestion() {
+          questionIndex++
+          const newAnswer = document.querySelectorAll(".bttns");
+          
+          
+          questionAsk.textContent = questions[questionIndex].question;
+          newAnswer.forEach((bttn, i) => {
+            bttn.textContent = questions[questionIndex].choices[i];
+          }) 
+        };
+        
+        // Timer for the Quiz
+        function setTime()  {
+          let timer = setInterval(function(){
+            countdown--;
+            timerTag.textContent = countdown
+            
+            if (countdown <= 0 ) {
+              clearInterval(timer)
+              gameOver();
+            }
+            
+          }, 1000)
+          
         }
-      };
-      
-      // Gives new question and puts new answers on the buttons that were removed 
-    function nextQuestion() {
-    questionIndex++
-    const newAnswer = document.querySelectorAll(".bttns");
+        
+        
+        // Prompt that lets user put initials and save score
+        function gameOver(){
+          let initials = document.getElementById("initials")
+          // let userInit = initials.value
+          var init = localStorage.getItem("init");
+          
+          initials.textContent = init;
+          
+          localStorage.setItem("init", init)
+          // let finalScore = score.value
+          // scoreBoard.textContent = score;
+          timerTag.setAttribute("style", "visibility:hidden")
+          endGame.setAttribute("style", "visibility:visible")
+          scoreTag.setAttribute("style", "visibility:hidden")
+          quizBox.setAttribute("style", "visibility:hidden");
+          submitBttn.setAttribute("style", "visibility:visible")
+          
+          
+        }
+        
+        
+        
+        
+        // save to localstorage and restart button
 
- 
-    questionAsk.textContent = questions[questionIndex].question;
-    newAnswer.forEach((bttn, i) => {
-     bttn.textContent = questions[questionIndex].choices[i];
-    }) 
-  };
-  
-  // Timer for the Quiz
-  function setTime()  {
-    let timer = setInterval(function(){
-    countdown--;
-    timerTag.textContent = countdown
-  
-    if (countdown <= 0) {
-        clearInterval(timer)
-        gameOver();
-    }
-
-}, 1000)
-
-}
-
-
-// Prompt that lets user put initials and save score
-function gameOver(){
-  var board;
-  board = prompt("Please put your intials to save score. ");
-
-}
-
-
-
-// cpu knows correct answer / subtract time 2
-
-//  countDown -10 
-
-
-// save to localstorage and restart button
-
-    
-    // time ends = score = putting initials
+        
+        // time ends = score = putting initials

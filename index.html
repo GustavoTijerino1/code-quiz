@@ -9,27 +9,28 @@
 </head>
 <body>
     <header> Quizzle Zizzle 2.0
-        <div> <span class="timer">60</span> </div>
-        <div> <span class="score">0 </span>  </div>
+        <div> <p> Timer: <span class="timer">60</span> </p> </div>
+        <div> <p> Score: <span class="score">0 </span> </p>   </div>
     </header>
     <main>
-        <div id="startBox">
-            <ul>
-                <li>
-                    Welcome! You're about to take a Time Quiz over JavaScript!
-                </li>
-                <li>
-                    Everytime you get an answer wrong , you will lose 10sec from your time, that's on the top right.
-                </li>
-                <li>
-                    Click the Start Button to begin and Goodluck!!
-                </li>
-            </ul>
-            <button id="startButton">Start</button>
-        </div>
+         <section id="startBox">
+            <div >
+                <ul>
+                    <li>
+                        Welcome! You're about to take a Time Quiz over JavaScript!
+                    </li>
+                    <li>
+                        Everytime you get an answer wrong , you will lose 30sec of your time.
+                    </li>
+                    <li>
+                        Click the Start Button to begin and Goodluck!!
+                    </li>
+                </ul>
+                <button id="startButton">Start</button>
+            </div>
+         </section>
+            <section id="quizBox">
             
-
-            <div id="quizBox">
                 <h2 id="questionAsk">Question</h2>
                 <div class="answer-box">
                     <button class="bttns" id="answerA">A</button>
@@ -37,11 +38,27 @@
                     <button class="bttns" id="answerC">C</button>
                     <button class="bttns" id="answerD">D</button>
                 </div>  
-                
-                <button type="submit" id="submitBttn"> Submit</button>
-            </div>
+        
+            </section>
 
+            <section class="endGame">
+                <div>
+                    <!-- <span id="scoreBoard">0</span> -->
+                    <form action="">
+
+                        <label for="initials">Put Initials to Save Your Score:</label><br>
+                        <input required type="text" id="initials" value=""><br>
+                        
+                        <button type="submit" id="submitBttn"> Submit</button>
+                    </form>
+                        
+                 </div>
+            </section>
+            
     </main>
+
+   
+    
     <script src="./script.js"></script>
 </body>
 </html>
